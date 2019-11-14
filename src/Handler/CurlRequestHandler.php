@@ -168,6 +168,11 @@ class CurlRequestHandler implements RequestHandler
             curl_setopt($curlHandle, CURLOPT_POSTFIELDS, (string) $request->getBody());
         }
 
+        if (!$request->hasHeader('expect') && $request->getBody()->getSize() > 0) {
+            // prevent cURL from adding `Expect: 100-continue` automatically
+            $headers['Expect'] = '';
+        }
+
         if ($request->getMethod() === self::METHOD_DELETE) {
             curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, self::METHOD_DELETE);
             if ($request->getBody()->getSize() > 0) {

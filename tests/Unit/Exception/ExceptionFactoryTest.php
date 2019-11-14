@@ -29,7 +29,11 @@ class ExceptionFactoryTest extends \PHPUnit_Framework_TestCase
     public function shouldInstantiateCorrectExceptionClass($code, $expectedClass, $expectedMessage)
     {
         $request = new Request('get', 'http://url.com', []);
-        $response = new Response($code, []);
+        if ($code < 100 || $code >= 600) {
+            $response = null;
+        } else {
+            $response = new Response($code, []);
+        }
         $message = 'error message';
         $handlerInfo = ['foo' => 'bar'];
         $exception = ExceptionFactory::exceptionFrom($code, $request, $message, $handlerInfo, '10', $response);

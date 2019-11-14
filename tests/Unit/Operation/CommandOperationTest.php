@@ -45,17 +45,6 @@ class CommandOperationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException \Getresponse\Sdk\Client\Exception\InvalidCommandDataException
-     * @expectedExceptionMessage Command Getresponse\Sdk\Client\Test\Unit\Operation\CommandOperationImplementation is missing required fields: email, campaign
-     */
-    public function shouldThrowInvalidCommandDataExceptionDuringGetBodyIfNotAllRequiredFieldsAreSet()
-    {
-        self::markTestSkipped('Do not check fields requirement');
-        $this->systemUnderTest->getBody();
-    }
-
-    /**
-     * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\InvalidCommandDataException
      */
     public function shouldThrowInvalidCommandDataExceptionDuringGetBodyIfItFailsToEncodeJson()
     {
