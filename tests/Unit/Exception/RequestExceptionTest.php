@@ -13,12 +13,12 @@ use GuzzleHttp\Psr7\Response;
  * Class RequestExceptionTest
  * @package Getresponse\Sdk\Client\Test\Unit\Exception
  */
-class RequestExceptionTest extends \PHPUnit_Framework_TestCase
+class RequestExceptionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @inheritDoc
      */
-    protected function setUp()
+    protected function setUp():void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -26,7 +26,7 @@ class RequestExceptionTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown():void
     {
         FunctionMockRegistry::resetAll();
     }

@@ -17,7 +17,7 @@ use GuzzleHttp\Psr7\Response;
  * Class ExceptionFactoryTest
  * @package Getresponse\Sdk\Client\Test\Unit\Exception
  */
-class ExceptionFactoryTest extends \PHPUnit_Framework_TestCase
+class ExceptionFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

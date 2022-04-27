@@ -15,8 +15,9 @@ use Psr\Http\Message\RequestInterface;
  * Class OperationResponseFactoryTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class OperationResponseFactoryTest extends \PHPUnit_Framework_TestCase
+class OperationResponseFactoryTest extends \PHPUnit\Framework\TestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
     /**
      * @test
      */

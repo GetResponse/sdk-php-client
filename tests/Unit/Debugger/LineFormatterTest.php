@@ -12,12 +12,12 @@ use GuzzleHttp\Psr7\Uri;
  * Class LineFormatterTest
  * @package Getresponse\Sdk\Client\Test\Unit\Debugger
  */
-class LineFormatterTest extends \PHPUnit_Framework_TestCase
+class LineFormatterTest extends \PHPUnit\Framework\TestCase
 {
     /** @var LineFormatter */
     private $systemUnderTest;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->systemUnderTest = new LineFormatter();
     }

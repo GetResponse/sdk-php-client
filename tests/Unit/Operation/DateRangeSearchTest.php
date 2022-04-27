@@ -8,7 +8,7 @@ use Getresponse\Sdk\Client\Operation\DateRangeSearch;
  * Class DateRangeSearchTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class DateRangeSearchTest extends \PHPUnit_Framework_TestCase
+class DateRangeSearchTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

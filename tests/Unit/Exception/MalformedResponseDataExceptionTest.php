@@ -11,9 +11,9 @@ use phpmock\functions\FixedValueFunction;
  * Class MalformedResponseDataExceptionTest
  * @package Getresponse\Sdk\Client\Test\Unit\Exception
  */
-class MalformedResponseDataExceptionTest extends \PHPUnit_Framework_TestCase
+class MalformedResponseDataExceptionTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp():void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -21,7 +21,7 @@ class MalformedResponseDataExceptionTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown():void
     {
         FunctionMockRegistry::resetAll();
     }

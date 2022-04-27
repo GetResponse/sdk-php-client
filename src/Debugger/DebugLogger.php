@@ -30,25 +30,17 @@ class DebugLogger implements LoggerInterface
     /**
      * @inheritDoc
      */
-    public function debug($message, array $context = [])
-    {
-        if (isset($context['request']) && !isset($context['response'])) {
-            $this->dataCollector->collectRequest($context['request']);
-        }
-        if (isset($context['response'])) {
-            $request = isset($context['request']) ? $context['request'] : null;
-            $info = isset($context['info']) ? $context['info'] : null;
-            $this->dataCollector->collectResponse($context['response'], $request, $info);
-        }
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         if (LogLevel::DEBUG) {
-            $this->debug($message, $context);
+            if (isset($context['request']) && !isset($context['response'])) {
+                $this->dataCollector->collectRequest($context['request']);
+            }
+            if (isset($context['response'])) {
+                $request = isset($context['request']) ? $context['request'] : null;
+                $info = isset($context['info']) ? $context['info'] : null;
+                $this->dataCollector->collectResponse($context['response'], $request, $info);
+            }
         }
     }
     

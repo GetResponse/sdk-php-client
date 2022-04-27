@@ -11,15 +11,16 @@ use Getresponse\Sdk\Client\Operation\SuccessfulOperationResponse;
  * Class OperationResponseCollectionTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class OperationResponseCollectionTest extends \PHPUnit_Framework_TestCase
+class OperationResponseCollectionTest extends \PHPUnit\Framework\TestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
     /** @var OperationResponseCollection */
     private $systemUnderTest;
     
     /**
      * @inheritDoc
      */
-    protected function setUp()
+    protected function setUp():void
     {
         $operations = [
             $this->prophesize(SuccessfulOperationResponse::class)->reveal(),

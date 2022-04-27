@@ -12,14 +12,15 @@ use Psr\Http\Message\RequestInterface;
  * Class CallTest
  * @package Unit\Handler
  */
-class CallTest extends \PHPUnit_Framework_TestCase
+class CallTest extends \PHPUnit\Framework\TestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
     /**
      * @var Call
      */
     private $systemUnderTest;
     
-    protected function setUp()
+    protected function setUp():void
     {
         $request = new Request(
             'POST',
@@ -77,11 +78,11 @@ class CallTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Invalid state. Call has an exception within.
      */
     public function shouldThrowExceptionWhenSetResponseAfterException()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Invalid state. Call has an exception within.');
         $exceptionMock = $this->prophesize(RequestException::class)->reveal();
         $this->systemUnderTest->setException($exceptionMock);
     
@@ -91,22 +92,22 @@ class CallTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Exception cannot be overwritten.
      */
     public function shouldThrowExceptionWhenOverwriteException()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Exception cannot be overwritten.');
         $this->systemUnderTest->setException($this->prophesize(RequestException::class)->reveal());
         $this->systemUnderTest->setException($this->prophesize(RequestException::class)->reveal());
     }
     
     /**
      * @test
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Invalid state. Call has a response within.
      */
     public function shouldThrowExceptionWhenSetExceptionAfterResponse()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Invalid state. Call has a response within.');
         $response = new Response(201, [], '{"contactId":"one","email":"test@email.com"}');
         $this->systemUnderTest->setResponse($response);
     
@@ -116,11 +117,11 @@ class CallTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Response cannot be overwritten.
      */
     public function shouldThrowExceptionWhenOverwriteResponse()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Response cannot be overwritten.');
         $this->systemUnderTest->setResponse(new Response(201, [], '{"contactId":"one","email":"test1@email.com"}'));
         $this->systemUnderTest->setResponse(new Response(201, [], '{"contactId":"one","email":"test2@email.com"}'));
     }

@@ -11,14 +11,14 @@ use GuzzleHttp\Psr7\Uri;
  * Class DataCollectorTest
  * @package Getresponse\Sdk\Client\Test\Unit\Debugger
  */
-class DataCollectorTest extends \PHPUnit_Framework_TestCase
+class DataCollectorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var DataCollector
      */
     private $systemUnderTest;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->systemUnderTest = new DataCollector();
     }

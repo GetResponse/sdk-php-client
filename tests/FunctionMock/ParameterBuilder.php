@@ -61,7 +61,7 @@ class ParameterBuilder
         if ($reflectionParameter->isDefaultValueAvailable()) {
             $defaultValue = $reflectionParameter->getDefaultValue();
         }
-        return sprintf('%s = %s', $parameter, $defaultValue);
+        return sprintf('%s = "%s"', $parameter, $defaultValue);
     }
     
     /**

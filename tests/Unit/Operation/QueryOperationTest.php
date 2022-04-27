@@ -8,14 +8,14 @@ use Getresponse\Sdk\Client\Operation\Pagination;
  * Class QueryOperationTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class QueryOperationTest extends \PHPUnit_Framework_TestCase
+class QueryOperationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var QueryOperationImplementation
      */
     private $systemUnderTest;
 
-    protected function setUp()
+    protected function setUp():void
     {
         $this->systemUnderTest = new QueryOperationImplementation();
     }

@@ -11,9 +11,9 @@ use phpmock\functions\FixedValueFunction;
  * Class InvalidCommandDataExceptionTest
  * @package Getresponse\Sdk\Client\Test\Unit\Exception
  */
-class InvalidCommandDataExceptionTest extends \PHPUnit_Framework_TestCase
+class InvalidCommandDataExceptionTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected function setUp():void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -21,7 +21,7 @@ class InvalidCommandDataExceptionTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown():void
     {
         FunctionMockRegistry::resetAll();
     }

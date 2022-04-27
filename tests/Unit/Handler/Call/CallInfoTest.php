@@ -8,7 +8,7 @@ use Getresponse\Sdk\Client\Handler\Call\CallInfo;
  * Class CallInfoTest
  * @package Unit\Handler
  */
-class CallInfoTest extends \PHPUnit_Framework_TestCase
+class CallInfoTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

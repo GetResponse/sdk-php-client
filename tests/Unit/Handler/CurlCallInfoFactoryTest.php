@@ -8,7 +8,7 @@ use Getresponse\Sdk\Client\Handler\CurlCallInfoFactory;
  * Class CurlCallInfoFactoryTest
  * @package Unit\Handler
  */
-class CurlCallInfoFactoryTest extends \PHPUnit_Framework_TestCase
+class CurlCallInfoFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

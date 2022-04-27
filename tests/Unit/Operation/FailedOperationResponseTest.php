@@ -14,12 +14,12 @@ use phpmock\functions\FixedValueFunction;
  * Class FailedOperationResponseTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class FailedOperationResponseTest extends \PHPUnit_Framework_TestCase
+class FailedOperationResponseTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @inheritDoc
      */
-    protected function setUp()
+    protected function setUp():void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -27,7 +27,7 @@ class FailedOperationResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown():void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -61,7 +61,7 @@ class FailedOperationResponseTest extends \PHPUnit_Framework_TestCase
         $systemUnderTest = FailedOperationResponse::createWithException(
             ExceptionFactory::exceptionFrom(500, $request, 'Some Exception message', [], '1.0')
         );
-        self::assertRegExp('/some exception message/i', $systemUnderTest->getErrorMessage());
+        self::assertMatchesRegularExpression('/some exception message/i', $systemUnderTest->getErrorMessage());
     }
 
     /**
@@ -86,11 +86,11 @@ class FailedOperationResponseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\MalformedResponseDataException
-     * @expectedExceptionMessage Invalid JSON: Syntax error (4) Data: {"message":"Error Message"}
      */
     public function shouldThrowMalformedResponseDataExceptionIfBodyIsNotAValidJsonString()
     {
+        $this->expectException(\Getresponse\Sdk\Client\Exception\MalformedResponseDataException::class);
+        $this->expectExceptionMessage('Invalid JSON: Syntax error (4) Data: {"message":"Error Message"}');
         $builder = new MockBuilder();
         $builder
             ->setNamespace('Getresponse\Sdk\Client\Exception')

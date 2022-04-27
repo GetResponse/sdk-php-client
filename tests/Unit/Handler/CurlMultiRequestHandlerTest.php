@@ -15,7 +15,7 @@ use phpmock\functions\FixedValueFunction;
  * Class CurlMultiRequestHandlerTest
  * @package Unit\Handler
  */
-class CurlMultiRequestHandlerTest extends \PHPUnit_Framework_TestCase
+class CurlMultiRequestHandlerTest extends \PHPUnit\Framework\TestCase
 {
     const HANDLER_NAMESPACE = 'Getresponse\Sdk\Client\Handler';
 
@@ -24,7 +24,7 @@ class CurlMultiRequestHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private $systemUnderTest;
 
-    protected function setUp()
+    protected function setUp():void
     {
         FunctionMockRegistry::resetAll();
         $this->systemUnderTest = new CurlMultiRequestHandler();
@@ -33,7 +33,7 @@ class CurlMultiRequestHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown():void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -112,10 +112,10 @@ class CurlMultiRequestHandlerTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\CallLimitOutOfBoundsException
      */
     public function shouldThrowCallLimitOutOfBoundsExceptionWhenRegisterTooManyCalls()
     {
+        $this->expectException(\Getresponse\Sdk\Client\Exception\CallLimitOutOfBoundsException::class);
         $callRegistry = new CallRegistry();
         for ($c = 0; $c <= CurlMultiRequestHandler::MAX_CALLS_LIMIT; $c++) {
             $callRegistry->registerRequest(new Request('GET', 'http://example.com', ['X-Test' => 'test-value']), 200);

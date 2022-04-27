@@ -23,8 +23,9 @@ use Psr\Http\Message\RequestInterface;
  * Class GetresponseClientTest
  * @package Getresponse\Sdk\Client\Test\Unit
  */
-class GetresponseClientTest extends \PHPUnit_Framework_TestCase
+class GetresponseClientTest extends \PHPUnit\Framework\TestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
     /**
      * @var GetresponseClient
      */
@@ -40,7 +41,7 @@ class GetresponseClientTest extends \PHPUnit_Framework_TestCase
      */
     private $operation;
 
-    protected function setUp()
+    protected function setUp():void
     {
         $this->requestHandlerMock = $this->prophesize(RequestHandler::class);
         
@@ -85,7 +86,7 @@ class GetresponseClientTest extends \PHPUnit_Framework_TestCase
         $this->requestHandlerMock->send(Argument::that(function (Call $call) {
             self::assertEquals('https://api.getresponse.com/some-url/123', (string) $call->getRequest()->getUri());
             self::assertEquals(['token'], $call->getRequest()->getHeader('x-auth'));
-            self::assertRegExp(
+            self::assertMatchesRegularExpression(
                 sprintf(
                     '/^%s\sGetResponse-Client\/%s\s\w+\s\(.[^\)]+\)$/',
                     str_replace('.', '\.', $this->operation->getVersion()),

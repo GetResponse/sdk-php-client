@@ -10,15 +10,16 @@ use Getresponse\Sdk\Client\Operation\SuccessfulOperationResponse;
  * Class OperationResponseCollectorTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class OperationResponseCollectorTest extends \PHPUnit_Framework_TestCase
+class OperationResponseCollectorTest extends \PHPUnit\Framework\TestCase
 {
+    use \Prophecy\PhpUnit\ProphecyTrait;
     /** @var OperationResponseCollector */
     private $systemUnderTest;
     
     /**
      * @inheritDoc
      */
-    protected function setUp()
+    protected function setUp():void
     {
         $this->systemUnderTest = new OperationResponseCollector();
     }
