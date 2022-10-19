@@ -32,7 +32,7 @@ class OperationResponseCollection implements \IteratorAggregate
     /**
      * @return \ArrayIterator |  OperationResponse[]
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->operations);
     }

@@ -12,7 +12,7 @@ class BaseModel implements \JsonSerializable
     /**
      * @return array
      */
-    function jsonSerialize()
+    function jsonSerialize(): mixed
     {
         return [];
     }

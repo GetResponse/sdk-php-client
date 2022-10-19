@@ -42,7 +42,7 @@ class CallRegistry implements \IteratorAggregate, \Countable
     /**
      * @return \ArrayIterator | Call[]
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->calls);
     }
@@ -83,9 +83,8 @@ class CallRegistry implements \IteratorAggregate, \Countable
     
     /**
      * Count elements of an object
-     * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->calls);
     }
