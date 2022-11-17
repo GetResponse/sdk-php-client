@@ -5,20 +5,23 @@ namespace Getresponse\Sdk\Client\Test\Unit\Operation;
 use Getresponse\Sdk\Client\Operation\FailedOperationResponse;
 use Getresponse\Sdk\Client\Operation\OperationResponseCollector;
 use Getresponse\Sdk\Client\Operation\SuccessfulOperationResponse;
+use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * Class OperationResponseCollectorTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class OperationResponseCollectorTest extends \PHPUnit_Framework_TestCase
+class OperationResponseCollectorTest extends TestCase
 {
+    use ProphecyTrait;
     /** @var OperationResponseCollector */
     private $systemUnderTest;
     
     /**
      * @inheritDoc
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->systemUnderTest = new OperationResponseCollector();
     }

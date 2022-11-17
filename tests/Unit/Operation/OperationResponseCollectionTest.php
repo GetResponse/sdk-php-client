@@ -6,20 +6,23 @@ use Getresponse\Sdk\Client\Operation\FailedOperationResponse;
 use Getresponse\Sdk\Client\Operation\OperationResponse;
 use Getresponse\Sdk\Client\Operation\OperationResponseCollection;
 use Getresponse\Sdk\Client\Operation\SuccessfulOperationResponse;
+use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * Class OperationResponseCollectionTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class OperationResponseCollectionTest extends \PHPUnit_Framework_TestCase
+class OperationResponseCollectionTest extends TestCase
 {
+    use ProphecyTrait;
     /** @var OperationResponseCollection */
     private $systemUnderTest;
     
     /**
      * @inheritDoc
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $operations = [
             $this->prophesize(SuccessfulOperationResponse::class)->reveal(),

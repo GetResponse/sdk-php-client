@@ -7,13 +7,15 @@ use Getresponse\Sdk\Client\Handler\Call\CallInfo;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
 
 /**
  * Class DebugLoggerTest
  * @package Getresponse\Sdk\Client\Test\Unit\Debugger
  */
-class DebugLoggerTest extends \PHPUnit_Framework_TestCase
+class DebugLoggerTest extends TestCase
 {
     /**
      * @var DebugLogger
@@ -21,16 +23,13 @@ class DebugLoggerTest extends \PHPUnit_Framework_TestCase
     private $systemUnderTest;
     
     /**
-     * @var DataCollector | \PHPUnit_Framework_MockObject_MockObject
+     * @var DataCollector|MockObject
      */
     private $dataCollectorMock;
     
-    protected function setUp()
+    protected function setUp(): void
     {
-        $this->dataCollectorMock = $this
-            ->getMockBuilder(DataCollector::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->dataCollectorMock = $this->createMock(DataCollector::class);
         $this->systemUnderTest = new DebugLogger($this->dataCollectorMock);
     }
     
@@ -44,7 +43,7 @@ class DebugLoggerTest extends \PHPUnit_Framework_TestCase
         $this->dataCollectorMock
             ->expects(static::once())
             ->method('collectRequest')
-            ->withConsecutive($this->equalTo($request));
+            ->withConsecutive([$this->equalTo($request)]);
         
         $this->systemUnderTest->debug('log message', [
             'request' => $request,
@@ -67,7 +66,7 @@ class DebugLoggerTest extends \PHPUnit_Framework_TestCase
         $this->dataCollectorMock
             ->expects(static::once())
             ->method('collectResponse')
-            ->withConsecutive($this->equalTo([$response, $request, $info]));
+            ->withConsecutive([$this->equalTo($response), $this->equalTo($request), $this->equalTo($info)]);
         
         $this->systemUnderTest->log(LogLevel::DEBUG, 'log message', [
             'request' => $request,

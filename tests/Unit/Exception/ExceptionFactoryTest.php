@@ -12,12 +12,13 @@ use Getresponse\Sdk\Client\Exception\ServerException;
 use Getresponse\Sdk\Client\Exception\UnauthorizedException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ExceptionFactoryTest
  * @package Getresponse\Sdk\Client\Test\Unit\Exception
  */
-class ExceptionFactoryTest extends \PHPUnit_Framework_TestCase
+class ExceptionFactoryTest extends TestCase
 {
     /**
      * @test

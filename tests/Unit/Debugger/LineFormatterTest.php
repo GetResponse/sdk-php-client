@@ -7,17 +7,18 @@ use Getresponse\Sdk\Client\Handler\Call\CallInfo;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class LineFormatterTest
  * @package Getresponse\Sdk\Client\Test\Unit\Debugger
  */
-class LineFormatterTest extends \PHPUnit_Framework_TestCase
+class LineFormatterTest extends TestCase
 {
     /** @var LineFormatter */
     private $systemUnderTest;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->systemUnderTest = new LineFormatter();
     }

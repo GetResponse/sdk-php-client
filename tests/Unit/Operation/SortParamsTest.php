@@ -3,35 +3,37 @@
 namespace Getresponse\Sdk\Client\Test\Unit\Operation;
 
 use Getresponse\Sdk\Client\Operation\SortParams;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class SortParamsTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class SortParamsTest extends \PHPUnit_Framework_TestCase
+class SortParamsTest extends TestCase
 {
     /**
      * @var SortParams
      */
     private $systemUnderTest;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->systemUnderTest = new SortParamsImplementation();
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Not allowed sort direction
      */
     public function shouldThrowInvalidArgumentExceptionForDirectionOtherThanAscOrDesc()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Not allowed sort direction');
         $this->systemUnderTest->sortBy('email', 'up');
     }
 
     /**
      * @test
+     * @doesNotPerformAssertions
      */
     public function shouldAllowAscAndDescSortDirections()
     {
@@ -50,36 +52,37 @@ class SortParamsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Not allowed sort param
      */
     public function shouldThrowInvalidArgumentExceptionWhenTryingToSortByInvalidField()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Not allowed sort param');
         $this->systemUnderTest->sortBy('campaign', 'asc');
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Not allowed sort param
      */
     public function shouldThrowInvalidArgumentExceptionWhenTryingToSortAscByInvalidField()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Not allowed sort param');
         $this->systemUnderTest->sortAscBy('campaign');
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Not allowed sort param
      */
     public function shouldThrowInvalidArgumentExceptionWhenTryingToSortDescByInvalidField()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Not allowed sort param');
         $this->systemUnderTest->sortDescBy('campaign');
     }
 
     /**
      * @test
+     * @doesNotPerformAssertions
      */
     public function shouldAllowToSortAscByAllowedField()
     {
@@ -90,6 +93,7 @@ class SortParamsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @doesNotPerformAssertions
      */
     public function shouldAllowToSortDescByAllowedField()
     {

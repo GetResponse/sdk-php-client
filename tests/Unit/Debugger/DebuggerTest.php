@@ -5,12 +5,14 @@ use Getresponse\Sdk\Client\Debugger\DataCollector;
 use Getresponse\Sdk\Client\Debugger\DebugDumper;
 use Getresponse\Sdk\Client\Debugger\Debugger;
 use Getresponse\Sdk\Client\Debugger\Formatter;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class DebuggerTest
  * @package Getresponse\Sdk\Client\Test\Unit\Debugger
  */
-class DebuggerTest extends \PHPUnit_Framework_TestCase
+class DebuggerTest extends TestCase
 {
     /**
      * @var Debugger
@@ -18,16 +20,13 @@ class DebuggerTest extends \PHPUnit_Framework_TestCase
     private $systemUnderTest;
     
     /**
-     * @var DataCollector | \PHPUnit_Framework_MockObject_MockObject
+     * @var DataCollector|MockObject
      */
     private $dataCollectorMock;
     
-    protected function setUp()
+    protected function setUp(): void
     {
-        $this->dataCollectorMock = $this
-            ->getMockBuilder(DataCollector::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->dataCollectorMock = $this->createMock(DataCollector::class);
         $this->systemUnderTest = new Debugger($this->dataCollectorMock);
     }
     
@@ -43,18 +42,18 @@ class DebuggerTest extends \PHPUnit_Framework_TestCase
             ->willReturn($debugData);
         
         $formattedDebugData = '{"data":[]}';
-        $formatterMock = $this->getMockBuilder(Formatter::class)->getMock();
+        $formatterMock = $this->createMock(Formatter::class);
         $formatterMock
             ->expects(static::once())
             ->method('format')
-            ->withConsecutive($this->equalTo($debugData))
+            ->withConsecutive([$this->equalTo($debugData)])
             ->willReturn($formattedDebugData);
         
-        $debugDumperMock = $this->getMockBuilder(DebugDumper::class)->getMock();
+        $debugDumperMock = $this->createMock(DebugDumper::class);
         $debugDumperMock
             ->expects(static::once())
             ->method('dump')
-            ->withConsecutive($this->equalTo($formattedDebugData));
+            ->withConsecutive([$this->equalTo($formattedDebugData)]);
         
         $this->systemUnderTest->debug($formatterMock, $debugDumperMock);
     }

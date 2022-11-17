@@ -3,12 +3,13 @@
 namespace Getresponse\Sdk\Client\Test\Unit\Operation;
 
 use Getresponse\Sdk\Client\Operation\DateRangeSearch;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class DateRangeSearchTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class DateRangeSearchTest extends \PHPUnit_Framework_TestCase
+class DateRangeSearchTest extends TestCase
 {
     /**
      * @test

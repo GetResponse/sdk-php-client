@@ -3,6 +3,7 @@
 namespace Getresponse\Sdk\Client\Handler\Call;
 
 use Psr\Http\Message\RequestInterface;
+use Traversable;
 
 /**
  * Class CallRegistry
@@ -42,7 +43,7 @@ class CallRegistry implements \IteratorAggregate, \Countable
     /**
      * @return \ArrayIterator | Call[]
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->calls);
     }
@@ -80,12 +81,8 @@ class CallRegistry implements \IteratorAggregate, \Countable
     {
         return !empty($this->calls[$requestIdentifier]);
     }
-    
-    /**
-     * Count elements of an object
-     * @return int
-     */
-    public function count()
+
+    public function count(): int
     {
         return count($this->calls);
     }

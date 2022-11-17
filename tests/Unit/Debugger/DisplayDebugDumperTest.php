@@ -2,19 +2,20 @@
 namespace Getresponse\Sdk\Client\Test\Unit\Debugger;
 
 use Getresponse\Sdk\Client\Debugger\DisplayDebugDumper;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class DisplayDebugDumperTest
  * @package Getresponse\Sdk\Client\Test\Unit\Debugger
  */
-class DisplayDebugDumperTest extends \PHPUnit_Framework_TestCase
+class DisplayDebugDumperTest extends TestCase
 {
     /**
      * @var DisplayDebugDumper
      */
     private $systemUnderTest;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->systemUnderTest = new DisplayDebugDumper();
     }

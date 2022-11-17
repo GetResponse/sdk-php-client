@@ -3,12 +3,13 @@
 namespace Getresponse\Sdk\Client\Test\Unit\Handler\Call;
 
 use Getresponse\Sdk\Client\Handler\Call\CallInfo;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CallInfoTest
  * @package Unit\Handler
  */
-class CallInfoTest extends \PHPUnit_Framework_TestCase
+class CallInfoTest extends TestCase
 {
     /**
      * @test

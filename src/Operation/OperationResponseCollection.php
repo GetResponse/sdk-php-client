@@ -1,6 +1,8 @@
 <?php
 namespace Getresponse\Sdk\Client\Operation;
 
+use Traversable;
+
 /**
  * Class OperationResponseCollection
  * @package Getresponse\Sdk\Client\Operation
@@ -32,7 +34,7 @@ class OperationResponseCollection implements \IteratorAggregate
     /**
      * @return \ArrayIterator |  OperationResponse[]
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->operations);
     }

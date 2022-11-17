@@ -29,14 +29,11 @@ class DateRangeSearch
         $this->to = $to;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return array_filter([
-            'from' => $this->from,
-            'to' => $this->to
+            'from' => $this->from ?? '',
+            'to' => $this->to ?? ''
         ], 'strlen');
     }
 }

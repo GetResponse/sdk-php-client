@@ -6,14 +6,15 @@ use Getresponse\Sdk\Client\Exception\MalformedResponseDataException;
 use Getresponse\Sdk\Client\Test\FunctionMock\FunctionMockRegistry;
 use Getresponse\Sdk\Client\Test\FunctionMock\MockBuilder;
 use phpmock\functions\FixedValueFunction;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class MalformedResponseDataExceptionTest
  * @package Getresponse\Sdk\Client\Test\Unit\Exception
  */
-class MalformedResponseDataExceptionTest extends \PHPUnit_Framework_TestCase
+class MalformedResponseDataExceptionTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -21,7 +22,7 @@ class MalformedResponseDataExceptionTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         FunctionMockRegistry::resetAll();
     }

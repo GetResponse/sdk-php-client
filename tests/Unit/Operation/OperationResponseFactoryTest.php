@@ -9,14 +9,17 @@ use Getresponse\Sdk\Client\Operation\OperationResponseFactory;
 use Getresponse\Sdk\Client\Operation\SuccessfulOperationResponse;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\RequestInterface;
 
 /**
  * Class OperationResponseFactoryTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class OperationResponseFactoryTest extends \PHPUnit_Framework_TestCase
+class OperationResponseFactoryTest extends TestCase
 {
+    use ProphecyTrait;
     /**
      * @test
      */

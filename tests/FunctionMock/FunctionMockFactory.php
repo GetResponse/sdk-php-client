@@ -2,6 +2,7 @@
 namespace Getresponse\Sdk\Client\Test\FunctionMock;
 
 use phpmock\MockBuilder;
+use SebastianBergmann\Template\Template;
 
 /**
  * Class FunctionMock
@@ -27,7 +28,7 @@ class FunctionMockFactory
             'invokeSignatureParameters' => $parameterBuilder->getSignatureParameters(),
             'bodyParameters' => $parameterBuilder->getBodyParameters(),
         ];
-        $template = new \Text_Template(__DIR__ . '/functionMockClassTemplate.tpl');
+        $template = new Template(__DIR__ . '/functionMockClassTemplate.tpl');
         $template->setVar($data, false);
         $definition = $template->render();
         eval($definition);
@@ -66,7 +67,7 @@ class FunctionMockFactory
             'signatureParameters' => $parameterBuilder->getSignatureParameters(),
             'bodyParameters' => $parameterBuilder->getBodyParameters(),
         ];
-        $template = new \Text_Template(__DIR__ . '/function.tpl');
+        $template = new Template(__DIR__ . '/function.tpl');
         $template->setVar($data, false);
         return $template->render();
     }

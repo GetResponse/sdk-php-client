@@ -2,6 +2,7 @@
 
 namespace Getresponse\Sdk\Client\Test\Unit\Handler;
 
+use Getresponse\Sdk\Client\Exception\CallLimitOutOfBoundsException;
 use Getresponse\Sdk\Client\Exception\ConnectException;
 use Getresponse\Sdk\Client\Handler\Call\CallRegistry;
 use Getresponse\Sdk\Client\Handler\CurlMultiRequestHandler;
@@ -10,12 +11,13 @@ use Getresponse\Sdk\Client\Test\FunctionMock\FunctionMockRegistry;
 use Getresponse\Sdk\Client\Test\FunctionMock\MockBuilder;
 use GuzzleHttp\Psr7\Request;
 use phpmock\functions\FixedValueFunction;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CurlMultiRequestHandlerTest
  * @package Unit\Handler
  */
-class CurlMultiRequestHandlerTest extends \PHPUnit_Framework_TestCase
+class CurlMultiRequestHandlerTest extends TestCase
 {
     const HANDLER_NAMESPACE = 'Getresponse\Sdk\Client\Handler';
 
@@ -24,7 +26,7 @@ class CurlMultiRequestHandlerTest extends \PHPUnit_Framework_TestCase
      */
     private $systemUnderTest;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         FunctionMockRegistry::resetAll();
         $this->systemUnderTest = new CurlMultiRequestHandler();
@@ -33,7 +35,7 @@ class CurlMultiRequestHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -112,10 +114,10 @@ class CurlMultiRequestHandlerTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\CallLimitOutOfBoundsException
      */
     public function shouldThrowCallLimitOutOfBoundsExceptionWhenRegisterTooManyCalls()
     {
+        $this->expectException(CallLimitOutOfBoundsException::class);
         $callRegistry = new CallRegistry();
         for ($c = 0; $c <= CurlMultiRequestHandler::MAX_CALLS_LIMIT; $c++) {
             $callRegistry->registerRequest(new Request('GET', 'http://example.com', ['X-Test' => 'test-value']), 200);

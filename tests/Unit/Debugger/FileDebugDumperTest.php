@@ -4,19 +4,20 @@ namespace Getresponse\Sdk\Client\Test\Unit\Debugger;
 use Getresponse\Sdk\Client\Debugger\FileDebugDumper;
 use Getresponse\Sdk\Client\Test\FunctionMock\FunctionMockRegistry;
 use Getresponse\Sdk\Client\Test\FunctionMock\MockBuilder;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class FileDebugDumperTest
  * @package Getresponse\Sdk\Client\Test\Unit\Debugger
  */
-class FileDebugDumperTest extends \PHPUnit_Framework_TestCase
+class FileDebugDumperTest extends TestCase
 {
     const DEBUG_DUMPER_NAMESPACE = 'Getresponse\Sdk\Client\Debugger';
     
     /**
      * @inheritDoc
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -24,7 +25,7 @@ class FileDebugDumperTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -47,10 +48,10 @@ class FileDebugDumperTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function shouldThrowExceptionWhenInvalidDir()
     {
+        $this->expectException(\InvalidArgumentException::class);
         new FileDebugDumper('somename');
     }
 }

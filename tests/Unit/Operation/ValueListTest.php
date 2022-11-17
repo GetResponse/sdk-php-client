@@ -3,19 +3,21 @@
 namespace Getresponse\Sdk\Client\Test\Unit\Operation;
 
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class ValueListTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class ValueListTest extends \PHPUnit_Framework_TestCase
+class ValueListTest extends TestCase
 {
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid values: fromField, status
      */
     public function shouldThrowExceptionForInvalidValues()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid values: fromField, status');
         new ValueListImplementation('name', 'email', 'fromField', 'status');
     }
 

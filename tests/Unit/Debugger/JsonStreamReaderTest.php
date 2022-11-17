@@ -3,6 +3,7 @@ namespace Getresponse\Sdk\Client\Test\Unit\Debugger;
 
 use Getresponse\Sdk\Client\Debugger\JsonStreamReader;
 use Getresponse\Sdk\Client\Test\FunctionMock\FunctionMockRegistry;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 use Getresponse\Sdk\Client\Test\FunctionMock\MockBuilder;
 
@@ -10,14 +11,14 @@ use Getresponse\Sdk\Client\Test\FunctionMock\MockBuilder;
  * Class JsonStreamReaderTest
  * @package Getresponse\Sdk\Client\Test\Unit\Debugger
  */
-class JsonStreamReaderTest extends \PHPUnit_Framework_TestCase
+class JsonStreamReaderTest extends TestCase
 {
     const DEBUG_DUMPER_NAMESPACE = 'Getresponse\Sdk\Client\Debugger';
     
     /** @var JsonStreamReader */
     private $systemUnderTest;
     
-    protected function setUp()
+    protected function setUp(): void
     {
         FunctionMockRegistry::resetAll();
         $this->systemUnderTest = new JsonStreamReader();
@@ -26,7 +27,7 @@ class JsonStreamReaderTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -36,9 +37,7 @@ class JsonStreamReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldRead()
     {
-        $streamMock = $this
-            ->getMockBuilder(StreamInterface::class)
-            ->getMock();
+        $streamMock = $this->createMock(StreamInterface::class);
         
         $streamMock
             ->expects(static::once())
@@ -51,13 +50,11 @@ class JsonStreamReaderTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Debugger\StreamReaderException
      */
     public function shouldThrowExceptionWhenJSONExtensionNotLoaded()
     {
-        $streamMock = $this
-            ->getMockBuilder(StreamInterface::class)
-            ->getMock();
+        $this->expectException(\Getresponse\Sdk\Client\Debugger\StreamReaderException::class);
+        $streamMock = $this->createMock(StreamInterface::class);
         
         $streamMock
             ->expects(static::never())

@@ -6,19 +6,20 @@ use Getresponse\Sdk\Client\Operation\CommandOperation;
 use Getresponse\Sdk\Client\Test\FunctionMock\FunctionMockRegistry;
 use Getresponse\Sdk\Client\Test\FunctionMock\MockBuilder;
 use phpmock\functions\FixedValueFunction;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CommandOperationTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class CommandOperationTest extends \PHPUnit_Framework_TestCase
+class CommandOperationTest extends TestCase
 {
     /**
      * @var CommandOperation | CommandOperationImplementation
      */
     private $systemUnderTest;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         FunctionMockRegistry::resetAll();
         $this->systemUnderTest = new CommandOperationImplementation();
@@ -27,27 +28,27 @@ class CommandOperationTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         FunctionMockRegistry::resetAll();
     }
 
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\InvalidCommandDataException
-     * @expectedExceptionMessage Field fromField is not available for command Getresponse\Sdk\Client\Test\Unit\Operation\CommandOperationImplementation
      */
     public function shouldThrowInvalidCommandDataExceptionDuringSetWithInvalidField()
     {
+        $this->expectException(\Getresponse\Sdk\Client\Exception\InvalidCommandDataException::class);
+        $this->expectExceptionMessage('Field fromField is not available for command Getresponse\Sdk\Client\Test\Unit\Operation\CommandOperationImplementation');
         $this->systemUnderTest->set('fromField', uniqid('fromField', true));
     }
 
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\InvalidCommandDataException
      */
     public function shouldThrowInvalidCommandDataExceptionDuringGetBodyIfItFailsToEncodeJson()
     {
+        $this->expectException(\Getresponse\Sdk\Client\Exception\InvalidCommandDataException::class);
         $builder = new MockBuilder();
         $builder
             ->setNamespace('Getresponse\Sdk\Client\Exception')

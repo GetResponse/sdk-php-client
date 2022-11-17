@@ -8,13 +8,14 @@ use Getresponse\Sdk\Client\Test\FunctionMock\FunctionMockRegistry;
 use Getresponse\Sdk\Client\Test\FunctionMock\MockBuilder;
 use GuzzleHttp\Psr7\Response;
 use phpmock\functions\FixedValueFunction;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class SuccessfulOperationResponseTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class SuccessfulOperationResponseTest extends \PHPUnit_Framework_TestCase
+class SuccessfulOperationResponseTest extends TestCase
 {
     /**
      * @var ResponseInterface
@@ -26,7 +27,7 @@ class SuccessfulOperationResponseTest extends \PHPUnit_Framework_TestCase
      */
     private $systemUnderTest;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         FunctionMockRegistry::resetAll();
         $this->response = new Response(
@@ -45,7 +46,7 @@ class SuccessfulOperationResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -76,11 +77,11 @@ class SuccessfulOperationResponseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\MalformedResponseDataException
-     * @expectedExceptionMessage Invalid JSON: Syntax error (4) Data: {"a": 123, "b": "abcd"}
      */
     public function shouldThrowMalformedResponseDataExceptionIfBodyIsNotAValidJsonString()
     {
+        $this->expectException(\Getresponse\Sdk\Client\Exception\MalformedResponseDataException::class);
+        $this->expectExceptionMessage('Invalid JSON: Syntax error (4) Data: {"a": 123, "b": "abcd"}');
         $builder = new MockBuilder();
         $builder
             ->setNamespace('Getresponse\Sdk\Client\Exception')

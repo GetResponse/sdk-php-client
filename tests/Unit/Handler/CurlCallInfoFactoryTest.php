@@ -3,12 +3,13 @@
 namespace Getresponse\Sdk\Client\Test\Unit\Handler;
 
 use Getresponse\Sdk\Client\Handler\CurlCallInfoFactory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CurlCallInfoFactoryTest
  * @package Unit\Handler
  */
-class CurlCallInfoFactoryTest extends \PHPUnit_Framework_TestCase
+class CurlCallInfoFactoryTest extends TestCase
 {
     /**
      * @test

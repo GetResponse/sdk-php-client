@@ -3,12 +3,13 @@
 namespace Getresponse\Sdk\Client\Test\Unit\Operation;
 
 use Getresponse\Sdk\Client\Operation\RateLimit;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class RateLimitTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class RateLimitTest extends \PHPUnit_Framework_TestCase
+class RateLimitTest extends TestCase
 {
     /**
      * @test
@@ -28,11 +29,11 @@ class RateLimitTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\InvalidRateLimitData
-     * @expectedExceptionMessage RateLimit-Reset invalid: -123
      */
     public function shouldThrowInvalidRateLimitDataExceptionIfResetIsNotValid()
     {
+        $this->expectException(\Getresponse\Sdk\Client\Exception\InvalidRateLimitData::class);
+        $this->expectExceptionMessage('RateLimit-Reset invalid: -123');
         $rateLimit = new RateLimit('30000', '29995', '-123 seconds');
 
         $rateLimit->getTimeFrameResetDateTime(new \DateTimeImmutable('now'));

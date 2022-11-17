@@ -30,7 +30,7 @@ class DebugLogger implements LoggerInterface
     /**
      * @inheritDoc
      */
-    public function debug($message, array $context = [])
+    public function debug($message, array $context = []): void
     {
         if (isset($context['request']) && !isset($context['response'])) {
             $this->dataCollector->collectRequest($context['request']);
@@ -45,7 +45,7 @@ class DebugLogger implements LoggerInterface
     /**
      * @inheritDoc
      */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         if (LogLevel::DEBUG) {
             $this->debug($message, $context);

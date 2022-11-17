@@ -3,19 +3,20 @@
 namespace Getresponse\Sdk\Client\Test\Unit\Operation;
 
 use Getresponse\Sdk\Client\Operation\Pagination;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class QueryOperationTest
  * @package Getresponse\Sdk\Client\Test\Unit\Operation
  */
-class QueryOperationTest extends \PHPUnit_Framework_TestCase
+class QueryOperationTest extends TestCase
 {
     /**
      * @var QueryOperationImplementation
      */
     private $systemUnderTest;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->systemUnderTest = new QueryOperationImplementation();
     }

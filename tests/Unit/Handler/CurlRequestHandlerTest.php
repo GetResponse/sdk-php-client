@@ -10,7 +10,9 @@ use Getresponse\Sdk\Client\Test\FunctionMock\FunctionMockRegistry;
 use Getresponse\Sdk\Client\Test\FunctionMock\MockBuilder;
 use GuzzleHttp\Psr7\Request;
 use phpmock\functions\FixedValueFunction;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -19,16 +21,17 @@ use Psr\Log\LoggerInterface;
  * Class CurlRequestHandlerTest
  * @package Unit\Handler
  */
-class CurlRequestHandlerTest extends \PHPUnit_Framework_TestCase
+class CurlRequestHandlerTest extends TestCase
 {
     const HANDLER_NAMESPACE = 'Getresponse\Sdk\Client\Handler';
+    use ProphecyTrait;
     
     /**
      * @var CurlRequestHandler
      */
     private $systemUnderTest;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         FunctionMockRegistry::resetAll();
         $this->systemUnderTest = new CurlRequestHandler();
@@ -37,7 +40,7 @@ class CurlRequestHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritDoc
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         FunctionMockRegistry::resetAll();
     }
@@ -124,10 +127,10 @@ class CurlRequestHandlerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\ConnectException
      */
     public function shouldThrowConnectExceptionOnCurlError()
     {
+        $this->expectException(\Getresponse\Sdk\Client\Exception\ConnectException::class);
         $request = new Request('GET', 'http://example.com', ['X-Test' => 'test-value']);
         $call = new Call($request, 200);
         $this->mockCurl(1);
@@ -140,10 +143,10 @@ class CurlRequestHandlerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Getresponse\Sdk\Client\Exception\ConnectException
      */
     public function shouldThrowConnectExceptionOnParseMessageException()
     {
+        $this->expectException(\Getresponse\Sdk\Client\Exception\ConnectException::class);
         $request = new Request('GET', 'http://example.com');
         $call = new Call($request, 200);
         $this->mockCurl(0, '2000 NOT OK');
@@ -213,8 +216,8 @@ class CurlRequestHandlerTest extends \PHPUnit_Framework_TestCase
         $request = new Request('GET', 'http://example.com');
         $call = new Call($request, 200);
 
-        $loggerMock->debug('Sending: GET http://example.com', ['request' => $request])->shouldBeCalled()->willReturn(null);
-        $loggerMock->debug('Received: 200', Argument::withKey('response'))->shouldBeCalled()->willReturn(null);
+        $loggerMock->debug('Sending: GET http://example.com', ['request' => $request])->shouldBeCalled();
+        $loggerMock->debug('Received: 200', Argument::withKey('response'))->shouldBeCalled();
 
         $systemUnderTest->send($call);
     }
@@ -235,8 +238,8 @@ class CurlRequestHandlerTest extends \PHPUnit_Framework_TestCase
         $request = new Request('GET', 'http://example.com');
         $call = new Call($request, 200);
 
-        $loggerMock->debug('Sending: GET http://example.com', ['request' => $request])->shouldBeCalled()->willReturn(null);
-        $loggerMock->debug(Argument::containingString('Thrown exception'), Argument::withKey('request'))->shouldBeCalled()->willReturn(null);
+        $loggerMock->debug('Sending: GET http://example.com', ['request' => $request])->shouldBeCalled();
+        $loggerMock->debug(Argument::containingString('Thrown exception'), Argument::withKey('request'))->shouldBeCalled();
 
         $systemUnderTest->send($call);
     }
