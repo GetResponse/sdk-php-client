@@ -192,7 +192,7 @@ class CurlRequestHandler implements RequestHandler
     protected function parseResponse($message)
     {
         try {
-            return \GuzzleHttp\Psr7\parse_response($message);
+            return \GuzzleHttp\Psr7\Message::parseResponse($message);
         } catch (\InvalidArgumentException $e) {
             throw ParseResponseException::create($e);
         }
