@@ -9,6 +9,7 @@ use Getresponse\Sdk\Client\Exception\RequestException;
 use Getresponse\Sdk\Client\Handler\Call\Call;
 use Getresponse\Sdk\Client\Handler\Call\CallRegistry;
 use Getresponse\Sdk\Client\Version;
+use GuzzleHttp\Psr7\Message;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\NullLogger;
@@ -192,7 +193,7 @@ class CurlRequestHandler implements RequestHandler
     protected function parseResponse($message)
     {
         try {
-            return \GuzzleHttp\Psr7\parse_response($message);
+            return Message::parseResponse($message);
         } catch (\InvalidArgumentException $e) {
             throw ParseResponseException::create($e);
         }
